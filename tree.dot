@@ -1,16 +1,22 @@
 digraph {
 rankdir=LR;
-n5 [label="{ 4.0 }", shape=record];
+n7 [label="{ L | data -8.0 | grad 0.0 }", shape=record];
+n7mul [label="*"];
+n7mul -> n7;
+n5 [label="{ d | data 4.0 | grad 0.0 }", shape=record];
 n5plus [label="+"];
 n5plus -> n5;
-n4 [label="{ -6.0 }", shape=record];
+n4 [label="{ e | data -6.0 | grad 0.0 }", shape=record];
 n4mul [label="*"];
 n4mul -> n4;
-n1 [label="{ 2.0 }", shape=record];
-n2 [label="{ -3.0 }", shape=record];
-n3 [label="{ 10.0 }", shape=record];
+n1 [label="{ a | data 2.0 | grad 0.0 }", shape=record];
+n2 [label="{ b | data -3.0 | grad 0.0 }", shape=record];
+n3 [label="{ c | data 10.0 | grad 0.0 }", shape=record];
+n6 [label="{ f | data -2.0 | grad 0.0 }", shape=record];
+n5 -> n7mul;
 n4 -> n5plus;
 n1 -> n4mul;
 n2 -> n4mul;
 n3 -> n5plus;
+n6 -> n7mul;
 }

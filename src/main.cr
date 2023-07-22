@@ -1,3 +1,11 @@
+def trace(root : Node) : Tuple(Set(Node), Set(Tuple(Node, Node)))
+  nodes, edges = Set(Node).new, Set(Tuple(Node, Node)).new
+
+  build(root, nodes, edges)
+
+  {nodes, edges}
+end
+
 def draw_dot(root : Node) : String
   dot = "digraph {\n"
   dot += "rankdir=LR;\n"
@@ -5,7 +13,7 @@ def draw_dot(root : Node) : String
   nodes, edges = trace(root)
   nodes.each do |n|
     uid = n.id.to_s
-    dot += "#{uid} [label=\"{ #{n.value} }\", shape=record];\n"
+    dot += "#{uid} [label=\"{ #{n.label} | data #{n.value} | grad #{n.grad} }\", shape=record];\n"
     if n._op != ""
       opLabel = n._op === "+" ? "plus" : "mul"
       dot += "#{uid + opLabel} [label=\"#{n._op}\"];\n"
@@ -29,14 +37,17 @@ struct Node
   @@id_counter = 0
 
   property id : String
+  property label : String
   property value
+  property grad
   property _children
   property _prev
   property _op
 
-  def initialize(@value : Float32, @_children = [] of Node, @_op = "")
+  def initialize(@value : Float32, @_children = [] of Node, @_op = "", @label = "")
     @_prev = @_children
     @id = "n#{(@@id_counter += 1)}"
+    @grad = 0.0
   end
 
   def +(other : Node)
@@ -62,25 +73,23 @@ def build(v : Node, nodes, edges)
   end
 end
 
-def trace(root : Node) : Tuple(Set(Node), Set(Tuple(Node, Node)))
-  nodes, edges = Set(Node).new, Set(Tuple(Node, Node)).new
+a = Node.new value: 2.0, label: "a"
+b = Node.new -3.0, label: "b"
+c = Node.new 10.0, label: "c"
+e = a * b
+e.label = "e"
 
-  build(root, nodes, edges)
+d = e + c
+d.label = "d"
 
-  {nodes, edges}
-end
+f = Node.new -2.0, label: "f"
 
-a = Node.new 2.0
-b = Node.new -3.0
-c = Node.new 10.0
-
-d = a * b + c
+l = d * f
+l.label = "L"
 
 puts d
 
-puts d._op
-
-dot_str = draw_dot(d)
+dot_str = draw_dot(l)
 
 # Write the output to 'tree.dot'
 File.write("tree.dot", dot_str)
