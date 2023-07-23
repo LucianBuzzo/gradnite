@@ -1,6 +1,7 @@
-require "./Node"
-require "./Neuron"
-require "./draw"
+require "../src/gradnite/gradnite"
+require "../src/gradnite/draw"
+
+include Gradnite
 
 puts "\n\n============ Running ============\n"
 
@@ -20,7 +21,7 @@ ys = [
 ypred = [] of Node
 loss = Node.new(0.0)
 
-100.times do |k|
+201.times do |k|
   # forward pass
   ypred = xs.map { |x|
     n.forward(x)

@@ -1,0 +1,14 @@
+name: gradnite
+version: 0.1.0
+
+authors:
+  - Lucian Buzzo <lucian.buzzo@gmail.com>
+
+description: |
+  A simple neural network library for Crystal
+
+crystal: 1.9.2
+
+license: MIT
+
+dependencies:

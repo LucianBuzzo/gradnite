@@ -1,3 +1,9 @@
-#! /bin/bash
+#!/bin/bash
 
-watchexec -w src -r "crystal src/main.cr && dot -Tpng tree.dot -o tree.png"
+# Make sure a file was provided
+if [ $# -eq 0 ]; then
+    echo "No arguments supplied. Please provide the path to the file to watch."
+    exit 1
+fi
+
+watchexec -w $1 -r "crystal $1 && dot -Tpng tree.dot -o tree.png"
