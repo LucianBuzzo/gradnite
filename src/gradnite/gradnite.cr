@@ -130,8 +130,8 @@ module Gradnite
     property bias : Node
 
     def initialize(input_count : Int64)
-      @weights = Array.new(input_count) { Node.new(rand) }
-      @bias = Node.new(rand)
+      @weights = Array.new(input_count) { Node.new(0.01 * rand) }
+      @bias = Node.new(0.0)
     end
 
     def run(x : Array(Float64) | Array(Node))

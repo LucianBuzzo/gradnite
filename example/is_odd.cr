@@ -5,13 +5,19 @@ include Gradnite
 # BIT_SIZE is our input layer size
 BIT_SIZE = 8
 
+puts "running with #{BIT_SIZE} bits"
+
 # Layer size is approximately 2/3 of the input size
 LAYER_SIZE = (BIT_SIZE * 2/3).ceil.to_i
 
 mlp = MLP.new(BIT_SIZE, [LAYER_SIZE, LAYER_SIZE, 1])
 
-max = 255
-nums = (1..max).to_a
+# Generate all the numbers that can be represented by BIT_SIZE bits
+max = (2 ** BIT_SIZE) - 1
+
+puts "building training set of numbers with a ceiling of #{max}"
+
+nums = (0..max).to_a
 
 def num_to_binary_array(n)
   BIT_SIZE.times.map { |bit|
@@ -30,7 +36,7 @@ ypred = [] of Node
 
 loss = Node.new(0.0)
 
-epochs = 100
+epochs = 50
 
 epochs.times do |k|
   # forward pass
@@ -48,6 +54,12 @@ epochs.times do |k|
     p.grad = 0.0
   }
   loss.backward
+
+  if loss.value < 0.0001
+    puts "loss: #{loss.value}"
+    puts "converged at epoch #{k}"
+    break
+  end
 
   # Gradient descent. Nudge all the parameters in the opposite direction of the gradient.
   # The gradient is showing us the direction that increases the loss, so we want to go the opposite way.
@@ -68,8 +80,8 @@ def is_odd?(n, mlp)
   return result > 0.0
 end
 
-puts is_odd?(201, mlp)
-puts is_odd?(202, mlp)
-puts is_odd?(203, mlp)
+puts "201 true - #{is_odd?(201, mlp)}"
+puts "202 false - #{is_odd?(202, mlp)}"
+puts "203 true - #{is_odd?(203, mlp)}"
 
 puts "done"
