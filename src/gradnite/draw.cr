@@ -17,7 +17,7 @@ def trace(root : Node) : Tuple(Set(Node), Set(Tuple(Node, Node)))
 end
 
 module Gradnite
-  def draw_dot(root : Node) : String
+  def draw_dot(root : Node, filePath : string) : String
     dot = "digraph {\n"
     dot += "rankdir=LR;\n"
 
@@ -40,5 +40,8 @@ module Gradnite
     dot += "}\n"
 
     dot
+
+    # Write the output to 'tree.dot'
+    File.write(filePath, dot_str)
   end
 end

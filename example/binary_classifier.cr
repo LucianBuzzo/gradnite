@@ -52,6 +52,3 @@ dot_str = draw_dot(loss)
 puts ypred.map { |y| y.is_a?(Node) ? y.value : y[0].value }
 
 puts "done"
-
-# Write the output to 'tree.dot'
-File.write("tree.dot", dot_str)
