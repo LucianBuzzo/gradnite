@@ -71,4 +71,30 @@ describe Tensor do
       tensor.size.should eq [2, 1, 2]
     end
   end
+
+  describe "#matmul" do
+    it "can multiply two 2D tensors with the same shape" do
+      a = Tensor.new([[1, 2], [3, 4]])
+      b = Tensor.new([[2, 0], [1, 2]])
+      c = a.matmul(b)
+      c.value.should eq [[4, 4], [10, 8]]
+    end
+
+    it "can multiply two 2D tensor with different shapes" do
+      a = Tensor.new([
+        [1, 2, 3],
+        [4, 5, 6],
+      ])
+      b = Tensor.new([
+        [7, 8],
+        [9, 10],
+        [11, 12],
+      ])
+      c = a.matmul(b)
+      c.value.should eq [
+        [58, 64],
+        [139, 154],
+      ]
+    end
+  end
 end

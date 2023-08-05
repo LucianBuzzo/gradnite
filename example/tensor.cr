@@ -1,9 +1,18 @@
 require "../src/gradnite/gradnite"
 
-f = Tensor.new([3.0, 3.0])
-t = Tensor.new([3, 3])
-i = Tensor.new(1)
-f = Tensor.new(1)
-z = Tensor.full([5, 1, 1], 2)
-puts z
-puts z.size
+a = Tensor.new([[1, 2], [3, 4]])
+b = Tensor.new([[2, 0], [1, 2]])
+c = a.matmul(b)
+puts c
+
+a = Tensor.new([
+  [1, 2, 3],
+  [4, 5, 6],
+])
+b = Tensor.new([
+  [7, 8],
+  [9, 10],
+  [11, 12],
+])
+c = a.matmul(b)
+puts c

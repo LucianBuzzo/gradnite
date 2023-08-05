@@ -63,6 +63,31 @@ class Tensor(T)
     s
   end
 
+  # Matrix multiplication
+  def matmul(other : Tensor(T))
+    if (self.size.size != 2 || other.size.size != 2)
+      raise "Can only multiply 2d matrices"
+    end
+
+    if (self.size[1] != other.size[0])
+      raise "Matrix dimensions cannot be multiplied, #{self.size} and #{other.size}"
+    end
+
+    result = Array(Float64).new(self.size[0], 0).map {
+      Array(Float64).new(other.size[1], 0)
+    }
+
+    self.size[0].times do |i|
+      other.size[1].times do |j|
+        self.size[1].times do |k|
+          result[i][j] += @value[i][k] * other.value[k][j]
+        end
+      end
+    end
+
+    Tensor.new(result)
+  end
+
   def to_s(io : IO)
     s = @value
     if (@value.is_a?(Array))
