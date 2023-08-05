@@ -1,4 +1,5 @@
 require "./draw"
+require "./tensor/tensor"
 
 module Gradnite
   def topo_sort(v : Node, topo, visited)

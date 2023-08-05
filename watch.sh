@@ -6,4 +6,4 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-watchexec -w $1 -r "crystal $1 && dot -Tpng tree.dot -o tree.png"
+watchexec -w $1 -w src -r "crystal $1"
