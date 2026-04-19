@@ -167,7 +167,6 @@ module Gradnite
 
     def initialize(input_count : Int32, layer_sizes : Array(Int32))
       sz = [input_count] + layer_sizes
-      puts sz
       @layers = layer_sizes.map_with_index do |size, i|
         Layer.new(sz[i], sz[i + 1])
       end
