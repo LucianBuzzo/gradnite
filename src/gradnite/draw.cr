@@ -39,9 +39,8 @@ module Gradnite
 
     dot += "}\n"
 
+    # Write the output to the provided file and return the DOT string.
+    File.write(filePath, dot)
     dot
-
-    # Write the output to 'tree.dot'
-    File.write(filePath, dot_str)
   end
 end
