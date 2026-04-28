@@ -47,7 +47,7 @@ loss = Node.new(0.0)
   }
 end
 
-dot_str = draw_dot(loss)
+dot_str = draw_dot(loss, "tree.dot")
 
 puts ypred.map { |y| y.is_a?(Node) ? y.value : y[0].value }
 
