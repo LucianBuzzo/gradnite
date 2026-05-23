@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Make sure a file was provided
 if [ $# -eq 0 ]; then
@@ -6,4 +7,5 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-watchexec -w $1 -r "crystal $1 && dot -Tpng tree.dot -o tree.png"
+file_to_watch="$1"
+watchexec -w "$file_to_watch" -r "crystal \"$file_to_watch\" && dot -Tpng tree.dot -o tree.png"
