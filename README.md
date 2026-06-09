@@ -38,7 +38,7 @@ node = Gradnite::Node.new(1.0) * Gradnite::Node.new(2.0)
 # divide two nodes together
 node = Gradnite::Node.new(1.0) / Gradnite::Node.new(2.0)
 
-# create a Neuron with 4 inputes
+# create a Neuron with 4 inputs
 neuron = Gradnite::Neuron.new(4)
 
 # create an MLP with 2 inputs, 2 hidden layers of 3 neurons each and 1 output
@@ -64,16 +64,16 @@ b = Gradnite::Node.new value: 2.0, label: "b"
 c = a * b
 c.label = "c"
 
-Gradnite::draw_dot(c, "examples/multiply.dot")
+Gradnite::draw_dot(c, "example/multiply.dot")
 ```
 
 You can now generate a png image of the computation graph using the `dot` command:
 
 ```bash
-dot -Tpng examples/multiply.dot -o examples/multiply.png
+dot -Tpng example/multiply.dot -o example/multiply.png
 ```
 
-For more examples of usage see the [examples](examples) directory.
+For more examples of usage see the [example](example) directory.
 
 ## Development
 
@@ -86,5 +86,5 @@ brew install crystal watchexec graphviz
 Run in watch mode:
 
 ```bash
-./watch.sh examples/binary_classifier.cr
+./watch.sh example/binary_classifier.cr
 ```
